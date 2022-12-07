@@ -9,24 +9,19 @@ using namespace std;
 
 void CreateGrid();
 void gotoxy(int x,int y);
-int cursorLimit(int cordinates);
+void cursorLimit(int &x,int &y);
 
 int main(){
 
     bool exit;
     char input;
-
-    int x=0;
-    int y=0;
+    int x=1,y=1;
 
     while(!exit){
-        CreateGrid();
+        system("CLS");
 
-        //naprawic granice (musza sie wykonywac przed przesunieciem)
-        if(x>5) x=5;
-        if(y>5) y=5;
-        if(x<0) x=0;
-        if(y<0) y=0;
+        CreateGrid();
+        cursorLimit(x,y);
         gotoxy(x,y);
 
         input = getch();
@@ -55,11 +50,9 @@ int main(){
             default:
                 break;
         }
+    }
 
-        system("CLS");
-        }
-
-
+    system("CLS");
     return 0;
 }
 
@@ -93,14 +86,9 @@ void gotoxy(int x,int y)
     SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), c );
 }
 
-int cursorLimit(int cordinates){
-    if(cordinates<0){
-        return 0;
-    }
-    else if(cordinates>5){
-         return 5;
-    }
-    else{
-        return cordinates;
-    }
+void cursorLimit(int &x,int &y){
+    if(x>5) x=5;
+    else if(y>5) y=5;
+    else if(x<1) x=1;
+    else if(y<1) y=1;
 }
